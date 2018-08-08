@@ -34,11 +34,19 @@ $(document).ready(function() {
       }
 
       $(".buttonOneClick").click(function() {
-        let fighterId = $('.buttonOneClick').val();
+        let fighterId = $(this).val();
         let fighterResult = currentRoster.findFighterById(fighterId);
         fighterOne = fighterResult;
         console.log(fighterResult);
-        $('#fighterOneContent').html(`<img src="${fighterResult.pictureLink}">`);
+        $('#fighterOneContent').html(`<img src="${fighterResult.pictureLink}"><br> <br><p>${fighterResult.firstName} ${fighterResult.lastName}</p><br><p>${fighterResult.weightClass}</p>`);
+      })
+
+      $(".buttonTwoClick").click(function() {
+        let fighterId = $(this).val();
+        let fighterResult = currentRoster.findFighterById(fighterId);
+        fighterTwo = fighterResult;
+        console.log(fighterResult);
+        $('#fighterTwoContent').html(`<img src="${fighterResult.pictureLink}"><br> <br><p>${fighterResult.firstName} ${fighterResult.lastName}</p><br><p>${fighterResult.weightClass}</p>`);
       })
 
 
