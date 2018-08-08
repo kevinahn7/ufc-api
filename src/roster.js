@@ -20,7 +20,7 @@ export class Roster {
   findFightersByName(name) {
     let findfighterReturn = []
     for (let i = 0; i < this.rosterList.length; i++) {
-      if(this.rosterList[i].firstName.includes(name) || this.rosterList[i].lastName.includes(name)) {
+      if(this.rosterList[i].firstName.includes(name) || this.rosterList[i].lastName.includes(name) || name === (this.rosterList[i].firstName + " " + this.rosterList[i].lastName)) {
         findfighterReturn.push(this.rosterList[i]);
       }
     }
