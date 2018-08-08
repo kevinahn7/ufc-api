@@ -1,5 +1,7 @@
 export class Roster {
-
+  constructor(rosterList) {
+    this.rosterList = rosterList;
+  }
   getStatsAll() {
     return new Promise(function(resolve, reject) {
       let request = new XMLHttpRequest();
@@ -14,5 +16,14 @@ export class Roster {
       request.open("GET", url, true);
       request.send();
     });
+  }
+  findFighter(name) {
+    let findfighterReturn = []
+    for (var i = 0; i < this.rosterList.length; i++) {
+      if(this.rosterList[i].firstName.includes(name) || this.rosterList[i].lastName.includes(name)) {
+        findfighterReturn.push(this.rosterList[i]);
+      }
+    }
+    return findfighterReturn;
   }
 }

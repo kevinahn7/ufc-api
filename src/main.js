@@ -11,14 +11,34 @@ $(document).ready(function() {
 
   let fighterList = new Roster();
   let promise = fighterList.getStatsAll();
-  let rosterList = {};
+  let rosterList = [];
   let newFighter;
+  let currentRoster;
   promise.then(function(response) {
     let body = JSON.parse(response);
     for(let i = 0; i < body.length; i++) {
-      let newFighter = new Fighter(body[i].id, body[i].first_name, body[i].last_name)
-      rosterList[newFighter.id] = newFighter;
+      newFighter = new Fighter(body[i].id, body[i].first_name, body[i].last_name, body[i].weight_class, body[i].thumbnail)
+      rosterList.push(newFighter);
     }
-    console.log(rosterList[5].firstName);
+    currentRoster = new Roster(rosterList);
+
+    $('#fighterOne').submit(function(event){
+      event.preventDefault();
+      let nameOne = $('#nameOne').val();
+      let fighterResultArray = currentRoster.findFighter(nameOne);
+      $("#fighterNames").html("");
+      for(let j = 0; j < fighterResultArray.length; j++) {
+        $('#fighterNames').append('<li>' + fighterResultArray[j].firstName + ' ' + fighterResultArray[j].lastName + '</li><button value="' + fighterResultArray[j] + '" class="buttonOneClick">Add to slot 1</button><button>Add to slot 2</button>');
+      }
+
+      $(".buttonOneClick").click(function() {
+        console.log($(".buttonOneClick").val().last);
+      })
+
+    });
+
+
   });
+
+
 });
