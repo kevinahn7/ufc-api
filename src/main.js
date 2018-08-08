@@ -14,6 +14,8 @@ $(document).ready(function() {
   let rosterList = [];
   let newFighter;
   let currentRoster;
+  let fighterOne;
+  let fighterTwo;
   promise.then(function(response) {
     let body = JSON.parse(response);
     for(let i = 0; i < body.length; i++) {
@@ -25,15 +27,20 @@ $(document).ready(function() {
     $('#fighterOne').submit(function(event){
       event.preventDefault();
       let nameOne = $('#nameOne').val();
-      let fighterResultArray = currentRoster.findFighter(nameOne);
+      let fighterResultArray = currentRoster.findFightersByName(nameOne);
       $("#fighterNames").html("");
       for(let j = 0; j < fighterResultArray.length; j++) {
-        $('#fighterNames').append('<li>' + fighterResultArray[j].firstName + ' ' + fighterResultArray[j].lastName + '</li><button value="' + fighterResultArray[j] + '" class="buttonOneClick">Add to slot 1</button><button>Add to slot 2</button>');
+        $('#fighterNames').append('<li>' + fighterResultArray[j].firstName + ' ' + fighterResultArray[j].lastName + '</li><button value="' + fighterResultArray[j].id + '" class="buttonOneClick">Add to slot 1</button><button value="' + fighterResultArray[j].id + '" class="buttonTwoClick">Add to slot 2</button>');
       }
 
       $(".buttonOneClick").click(function() {
-        console.log($(".buttonOneClick").val().last);
+        let fighterId = $('.buttonOneClick').val();
+        let fighterResult = currentRoster.findFighterById(fighterId);
+        fighterOne = fighterResult;
+        console.log(fighterResult);
+        $('#fighterOneContent').html(`<img src="${fighterResult.pictureLink}">`);
       })
+
 
     });
 

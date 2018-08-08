@@ -17,13 +17,21 @@ export class Roster {
       request.send();
     });
   }
-  findFighter(name) {
+  findFightersByName(name) {
     let findfighterReturn = []
-    for (var i = 0; i < this.rosterList.length; i++) {
+    for (let i = 0; i < this.rosterList.length; i++) {
       if(this.rosterList[i].firstName.includes(name) || this.rosterList[i].lastName.includes(name)) {
         findfighterReturn.push(this.rosterList[i]);
       }
     }
     return findfighterReturn;
+  }
+
+  findFighterById(id) {
+    for (let i = 0; i < this.rosterList.length; i++) {
+      if(this.rosterList[i].id === parseInt(id)) {
+        return this.rosterList[i];
+      }
+    }
   }
 }
