@@ -1,3 +1,4 @@
+
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,10 +19,12 @@ $(document).ready(function() {
   let fighterTwo;
   promise.then(function(response) {
     let body = JSON.parse(response);
+
     for(let i = 0; i < body.length; i++) {
       newFighter = new Fighter(body[i].id, body[i].first_name, body[i].last_name, body[i].weight_class, body[i].thumbnail)
       rosterList.push(newFighter);
     }
+
     currentRoster = new Roster(rosterList);
 
     $('#fighterOne').submit(function(event){
@@ -48,12 +51,8 @@ $(document).ready(function() {
         console.log(fighterResult);
         $('#fighterTwoContent').html(`<img src="${fighterResult.pictureLink}"><br> <br><p>${fighterResult.firstName} ${fighterResult.lastName}</p><br><p>${fighterResult.weightClass}</p>`);
       })
-
-
     });
-
-
+  }, function(error) {
+    $('.showErrors').text(`There was an error processing your request: ${error.message}`);
   });
-
-
 });
