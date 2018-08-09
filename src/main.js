@@ -32,7 +32,7 @@ $(document).ready(function() {
 
     currentRoster = new Roster(rosterList);
 
-    $('#fighterOne').submit(function(event){
+    $('#fighterOne').submit((event) => {
       event.preventDefault();
       let nameOne = $('#nameOne').val();
       let fighterResultArray = currentRoster.findFightersByName(nameOne);
@@ -57,16 +57,16 @@ $(document).ready(function() {
         $('#fighterTwoContent').html(`<img src="${fighterResult.pictureLink}"><br> <br><p>${fighterResult.firstName} ${fighterResult.lastName}</p><br><p>${fighterResult.weightClass}</p>`);
       })
     });
-  }, function(error) {
+  }, (error) => {
     $('.showErrors').text(`There was an error processing your request: ${error.message}`);
   });
-  promiseTwo.then(function(response) {
+  promiseTwo.then((response) => {
     let body = JSON.parse(response);
 
     for(let i = 0; i < body.length; i++) {
       $('.fights').append('<tr><td>' + body[i].title_tag_line + '</td><td>' + body[i].arena + '</td><td>' + body[i].location + '</td><td>' + body[i].subtitle + '</td><td>' + body[i].event_time_text + '</td></tr>');
     }
-  }, function(error) {
-    $('.showErrors').text(`There was an error processing your request: ${error.message}`);
+  }, (error) => {
+    $('.showErrorsEvents').text(`There was an error processing your request: ${error.message}`);
   });
 });
