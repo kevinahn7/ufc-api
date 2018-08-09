@@ -1,3 +1,12 @@
 body {
   background-color: #fffff0;
 }
+
+#fighterNames {
+  overflow: auto;
+  max-height: 400px;
+}
+
+#searchBox {
+  min-height: 500px;
+}
